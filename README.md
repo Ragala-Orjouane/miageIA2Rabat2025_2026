@@ -1,3 +1,5 @@
+# Réaliser par :
+# Ragala Orjouane
 # Survivors Game (p5.js)
 
 **Description**  
