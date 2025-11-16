@@ -28,13 +28,16 @@ class Projectile {
     }
 
     // SEEK vers la cible fixée
-    if (this.target) {
+  if (this.target) {
       let desired = p5.Vector.sub(this.target.pos, this.pos);
-      desired.setMag(this.maxSpeed);
-      let steer = p5.Vector.sub(desired, this.vel);
-      steer.limit(this.maxForce);
-      this.acc.add(steer);
-    }
+      if (desired.mag() > 0.1) {  // éviter vecteur nul
+          desired.setMag(this.maxSpeed);
+          let steer = p5.Vector.sub(desired, this.vel);
+          steer.limit(this.maxForce);
+          this.acc.add(steer);
+      }
+  }
+
 
     // Accélération optionnelle pour fluidité
     this.vel.add(this.acc);

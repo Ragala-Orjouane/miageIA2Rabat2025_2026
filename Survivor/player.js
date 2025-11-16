@@ -5,6 +5,7 @@ let playerStats = {
   xpToNext: 10,
   projectileDmg: 1,
   projectileSpeed: 7,
+  projectileCount: 4,
   moveSpeed: 4, // player maxSpeed
   hp:100,
   maxHp: 100
@@ -28,14 +29,17 @@ class Player extends Vehicle {
       if (millis() - lastFire < fireInterval) return;
       lastFire = millis();
 
-      // on prend le vecteur vers la souris
-      let mouseDir = createVector(mouseX - this.pos.x, mouseY - this.pos.y).setMag(playerStats.projectileSpeed);
+      // vecteur vers la souris (correct)
+      let mouseDir = createVector(mouseX - this.pos.x, mouseY - this.pos.y);
+      mouseDir.setMag(playerStats.projectileSpeed);
 
       // tire autant de projectiles que le joueur possède
       for (let i = 0; i < playerStats.projectileCount; i++) {
           bullets.push(new Projectile(this.pos.x, this.pos.y, mouseDir, playerStats.projectileDmg, 2000));
       }
   }
+
+
 
 
   takeDamage(amount) {
